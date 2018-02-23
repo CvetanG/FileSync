@@ -17,7 +17,7 @@ public class FileSync {
 	List<String> listPathBackup;
 	List<String> listPathSkip;
 	
-	private void walk(String path, List<File> files) {
+	public void walk(String path, List<File> files) {
 		
 		File root = new File(path);
 		File[] list = root.listFiles();
@@ -37,7 +37,7 @@ public class FileSync {
 		}
 	}
 	
-	private void checkAndCreateDir(String path) {
+	public void checkAndCreateDir(String path) {
 
 		File dir = new File(path);
 
@@ -57,7 +57,7 @@ public class FileSync {
 		}
 	}
 
-	private void copyFileUsingStream(File source, File backup) throws IOException {
+	public void copyFileUsingStream(File source, File backup) throws IOException {
 	    InputStream is = null;
 	    OutputStream os = null;
 	    try {
@@ -74,7 +74,7 @@ public class FileSync {
 	    }
 	}
 	
-	private void deleteOldFiles(String dirBackup, String dirSource) throws IOException {
+	public void deleteOldFiles(String dirBackup, String dirSource) throws IOException {
 	    
 		List<File> filesBackup = new ArrayList<>();
 		this.walk(dirBackup, filesBackup);
@@ -95,7 +95,7 @@ public class FileSync {
 		}
 	}
 	
-	private void deleteDir(File file) {
+	public void deleteDir(File file) {
 	    File[] contents = file.listFiles();
 	    if (contents != null) {
 	        for (File f : contents) {
@@ -105,7 +105,7 @@ public class FileSync {
 	    file.delete();
 	}
 	
-	private List<String> getFileName(List<File> files) throws IOException {
+	public List<String> getFileName(List<File> files) throws IOException {
 	    
 		List<String> fileNames = new ArrayList<>();
 		
@@ -126,47 +126,6 @@ public class FileSync {
 			files.add(file);
 		}
 		return files;
-		
-	}
-	
-	public static void main(String[] args) throws IOException {
-		
-		FileSync fSync = new FileSync();
-		
-//		String pathSource = "D:\\Tavex_01.xlsx";
-		
-		String fileName = "install wls.txt";
-		
-		String dirSource = "/home/cvetan/Downloads/";
-		String dirBackup = "/home/cvetan/cecotemp/";
-		
-		String pathSource = dirSource + fileName;
-		String pathBackup = dirBackup + fileName;
-		
-		File fileSource = new File(pathSource);
-//		System.out.println(fileSource.getName());
-//		System.out.println(fileSource.lastModified());
-		
-		File fileBackup = new File(pathBackup);
-		
-		/* test walk */
-//		fSync.walk(dirSource);
-		
-		/* test deleteOldFiles */
-		if (fSync.deleteOldFiles) {
-			fSync.deleteOldFiles(dirBackup, dirSource);
-		}
-		
-		/* check and copy files */
-//		if (!fileBackup.exists() || fileSource.lastModified() > fileBackup.lastModified()) {
-//			fSync.checkAndCreateDir(dirBackup);
-//			System.out.println("Copy/updated file: " + fileBackup.getAbsolutePath());
-//			fSync.copyFileUsingStream(fileSource, fileBackup);
-//		} else {
-//			System.out.println(fileBackup.getAbsolutePath());
-//			System.out.println(fileBackup.lastModified());
-//		}
-		
 		
 	}
 	
