@@ -1,0 +1,8 @@
+{
+    "dirs":[{
+        "dirSource": "/home/cvetan/Pictures",
+        "dirBackup": "/home/cvetan/cecotemp/",
+        "filesDirToSkip": ["/home/cvetan/Pictures/cecotemp", "comedy.png"],
+        "fileTypesToSkip": ["jpg"]
+    }]
+}

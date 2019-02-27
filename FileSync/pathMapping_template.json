@@ -1,0 +1,16 @@
+{
+    "dirs": [
+	    {
+	        "dirSource": "example path source 1",
+	        "dirBackup": "example path backup 1",
+	        "filesDirToSkip": ["example path skip 1.1", "example path skip 1.2" ],
+	        "fileTypesToSkip": ["filetype 1", "filetype 2" ]
+	    },
+	    {
+	        "dirSource": "example path source 2",
+	        "dirBackup": "example path backup 2",
+	        "filesDirToSkip": ["example path skip 2.1", "example path skip 2.2" ],
+	        "fileTypesToSkip": ["filetype 1", "filetype 2" ]
+	    }
+    ]
+}
