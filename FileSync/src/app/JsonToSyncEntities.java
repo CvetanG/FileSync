@@ -10,15 +10,15 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class JsonToPathMapEntities {
+public class JsonToSyncEntities {
 
 	private static final String ARRAY_KEY = "dirs";
 
-	private List<PathMapEntity> listPathMap;
+	private List<SyncEntity> listSyncEnt;
 
-	public JsonToPathMapEntities(String fileName) {
+	public JsonToSyncEntities(String fileName) {
 		JSONObject json = read(fileName);
-		this.listPathMap = objectToPathMap(json);
+		this.listSyncEnt = objectToSyncEnt(json);
 	}
 
 	private JSONObject read(String fileName) {
@@ -32,45 +32,45 @@ public class JsonToPathMapEntities {
 		return new JSONObject(content);
 	}
 
-	private List<PathMapEntity> objectToPathMap(JSONObject json) {
+	private List<SyncEntity> objectToSyncEnt(JSONObject json) {
 
-		List<PathMapEntity> result = new ArrayList<>();
+		List<SyncEntity> result = new ArrayList<>();
 
 		ObjectMapper m = new ObjectMapper();
 		JSONArray jsonArray = json.getJSONArray(ARRAY_KEY);
 		for (int i = 0; i < jsonArray.length(); i++) {
-			PathMapEntity pm = null;
+			SyncEntity se = null;
 			JSONObject jsonChild = jsonArray.getJSONObject(i);
 			try {
-				pm = m.readValue(jsonChild.toString(), PathMapEntity.class);
+				se = m.readValue(jsonChild.toString(), SyncEntity.class);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-			if (pm != null) {
-				pm.setFilesSource(new ArrayList<File>());
-				pm.setNestedDirsSource(new ArrayList<File>());
-				pm.setFilesBackup(new ArrayList<File>());
-				pm.setNestedDirsBackup(new ArrayList<File>());
-				result.add(pm);
+			if (se != null) {
+				se.setFilesSource(new ArrayList<File>());
+				se.setNestedDirsSource(new ArrayList<File>());
+				se.setFilesBackup(new ArrayList<File>());
+				se.setNestedDirsBackup(new ArrayList<File>());
+				result.add(se);
 			}
 		}
 		return result;
 	}
 
-	public List<PathMapEntity> getListPathMap() {
-		return listPathMap;
+	public List<SyncEntity> getListSyncEnt() {
+		return listSyncEnt;
 	}
 
 	public static void main(String[] args) {
 
 		String fileName = "pathMapping_Linux.json";
 
-		JsonToPathMapEntities reader = new JsonToPathMapEntities(fileName);
+		JsonToSyncEntities reader = new JsonToSyncEntities(fileName);
 
-		List<PathMapEntity> listPathMap = reader.getListPathMap();
+		List<SyncEntity> listPathMap = reader.getListSyncEnt();
 
-		for (PathMapEntity pathMap : listPathMap) {
+		for (SyncEntity pathMap : listPathMap) {
 			System.out.println(pathMap);
 
 		}

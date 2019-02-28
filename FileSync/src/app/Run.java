@@ -11,11 +11,12 @@ public class Run {
 		
 		String fileName = "pathMapping_Linux.json";
 	
-		JsonToPathMapEntities reader = new JsonToPathMapEntities(fileName);
+		JsonToSyncEntities reader = new JsonToSyncEntities(fileName);
 	
-		List<PathMapEntity> listPathMap = reader.getListPathMap();
-		for (PathMapEntity pathMapEntity : listPathMap) {
-			Utils.syncDirs(pathMapEntity);
+		List<SyncEntity> syncEntities = reader.getListSyncEnt();
+		for (SyncEntity syncEnt : syncEntities) {
+			SyncManager manager = new SyncManager(syncEnt);
+			manager.sync();
 		}
 	}
 }

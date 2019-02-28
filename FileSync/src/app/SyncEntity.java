@@ -3,10 +3,11 @@ package app;
 import java.io.File;
 import java.util.List;
 
-public class PathMapEntity {
+public class SyncEntity {
 	
 	private String dirSource;
 	private String dirBackup;
+	private boolean deleteOldFiles;
 	private List<String> filesDirToSkip;
 	private List<String> fileTypesToSkip;
 
@@ -29,6 +30,14 @@ public class PathMapEntity {
 
 	public void setDirBackup(String dirBackup) {
 		this.dirBackup = dirBackup;
+	}
+	
+	public boolean isDeleteOldFiles() {
+		return deleteOldFiles;
+	}
+
+	public void setDeleteOldFiles(boolean deleteOldFiles) {
+		this.deleteOldFiles = deleteOldFiles;
 	}
 
 	public List<String> getFilesDirToSkip() {
@@ -79,27 +88,13 @@ public class PathMapEntity {
 		this.fileTypesToSkip = fileTypesToSkip;
 	}
 
-	private StringBuilder printPathsToSkip() {
-		StringBuilder srtBuilder = new StringBuilder();
-		srtBuilder.append('[');
-		for (int i = 0; i < filesDirToSkip.size(); i++) {
-			srtBuilder.append(filesDirToSkip.get(i));
-			if (i < (filesDirToSkip.size() -1)) {
-				srtBuilder.append(", ");
-			}
-		}
-		srtBuilder.append(']');
-		return srtBuilder;
-	}
-	
 	@Override
 	public String toString() {
-		StringBuilder b = printPathsToSkip();
-		return "PathMap {pathSource=" + dirSource + ","
-				+ " pathBackup=" + dirBackup + ","
-						+ " pathsToSkip=" + 
-						b
-				+ "}";
+		return "SyncEntity [dirSource=" + dirSource + ", dirBackup=" + dirBackup + ", deleteOldFiles=" + deleteOldFiles
+				+ ", filesDirToSkip=" + filesDirToSkip + ", fileTypesToSkip=" + fileTypesToSkip + ", filesSource="
+				+ filesSource + ", nestedDirsSource=" + nestedDirsSource + ", filesBackup=" + filesBackup
+				+ ", nestedDirsBackup=" + nestedDirsBackup + "]";
 	}
-
+	
+	
 }
